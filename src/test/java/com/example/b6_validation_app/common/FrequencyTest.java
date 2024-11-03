@@ -25,17 +25,6 @@ class FrequencyTest {
     assertTrue(isWeeklyMultiple);
   }
 
-  private static Stream<Arguments> frequencyAndExpectedMultipleTestData() {
-    return Stream.of(
-      Arguments.of(Frequency.WEEK, 1),
-      Arguments.of(Frequency.TWO_WEEK, 2),
-      Arguments.of(Frequency.FOUR_WEEK, 4),
-      Arguments.of(Frequency.MONTH, 4),
-      Arguments.of(Frequency.QUARTER, 13),
-      Arguments.of(Frequency.YEAR, 52)
-    );
-  }
-
   @ParameterizedTest
   @EnumSource(Frequency.class)
   void frequenciesShouldHavePositiveWeekMultiple(Frequency frequency) {
@@ -68,5 +57,16 @@ class FrequencyTest {
 
     // then
     assertEquals(monthMultiple, fourWeekMultiple);
+  }
+
+  private static Stream<Arguments> frequencyAndExpectedMultipleTestData() {
+    return Stream.of(
+      Arguments.of(Frequency.WEEK, 1),
+      Arguments.of(Frequency.TWO_WEEK, 2),
+      Arguments.of(Frequency.FOUR_WEEK, 4),
+      Arguments.of(Frequency.MONTH, 4),
+      Arguments.of(Frequency.QUARTER, 13),
+      Arguments.of(Frequency.YEAR, 52)
+    );
   }
 }
