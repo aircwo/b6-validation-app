@@ -8,4 +8,7 @@ public class RegularAmount {
   private String amount;
   private Frequency frequency;
 
+  public Integer getAmountAsPence() {
+    return 0;
+  }
 }

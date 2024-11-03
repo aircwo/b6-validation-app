@@ -39,6 +39,18 @@ class RegularAmountTest {
     assertEquals(expectedOutput, regularAmount.getAmount());
   }
 
+  @Test
+  void shouldGetAmountAsPence() {
+    // given
+    RegularAmount regularAmount = new RegularAmount();
+
+    // when
+    regularAmount.setAmount("12.34");
+
+    // then
+    assertEquals(1234, regularAmount.getAmountAsPence());
+  }
+
   // Can be any stirng value in theory, we anticipate a valid amount before our validation should be hit.
   private static Stream<Arguments> stringVariationTestData() {
     return Stream.of(
