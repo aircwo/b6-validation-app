@@ -5,8 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import com.example.b6_validation_app.common.Frequency;
 import com.example.b6_validation_app.common.RegularAmount;
@@ -45,12 +50,12 @@ class WeeklyDivisibleAmountValidatorTest {
     assertEquals(boolean.class, isValidMethod.getReturnType());
   }
 
-  @Test
-  void shouldPassValidationWhenFrequencyIsNull() {
+  @ParameterizedTest
+  @MethodSource("weekAndMonthTestCase")
+  void shouldPassValidationWhenFrequencyIsMonth(Frequency frequency) {
     // given
     RegularAmount regularAmount = new RegularAmount();
-    regularAmount.setAmount("100.00");
-    regularAmount.setFrequency(null);
+    regularAmount.setFrequency(frequency);
 
     // when
     boolean isValid = validator.isValid(regularAmount, context);
@@ -59,43 +64,37 @@ class WeeklyDivisibleAmountValidatorTest {
     assertTrue(isValid);
   }
 
-  @Test
-  void shouldPassValidationWhenAmountIsNull() {
+  @ParameterizedTest(name = "When amount is {0} and frequency is {1}, validation should pass")
+  @MethodSource("nullCheckTestCases")
+  void shouldPassValidationForNullValues(String amount, Frequency frequency) {
     // given
     RegularAmount regularAmount = new RegularAmount();
-    regularAmount.setAmount(null);
-    regularAmount.setFrequency(Frequency.FOUR_WEEK);
+    regularAmount.setAmount(amount);
+    regularAmount.setFrequency(frequency);
 
     // when
     boolean isValid = validator.isValid(regularAmount, context);
 
     // then
-    assertTrue(isValid);
+    assertTrue(isValid, String.format("Validation should pass when amount is '%s' and frequency is '%s'", amount, frequency));
   }
 
-  @Test
-  void shouldPassValidationWhenFrequencyIsWeek() {
-    // given
-    RegularAmount regularAmount = new RegularAmount();
-    regularAmount.setFrequency(Frequency.WEEK);
-
-    // when
-    boolean isValid = validator.isValid(regularAmount, context);
-
-    // then
-    assertTrue(isValid);
+  private static Stream<Arguments> nullCheckTestCases() {
+    return Stream.of(
+      Arguments.of("100.00", null),
+      Arguments.of("0.00", null),
+      Arguments.of("123.45", null),
+      Arguments.of(null, Frequency.WEEK),
+      Arguments.of(null, Frequency.TWO_WEEK),
+      Arguments.of(null, Frequency.MONTH),
+      Arguments.of(null, null)
+    );
   }
 
-  @Test
-  void shouldPassValidationWhenFrequencyIsMonth() {
-    // given
-    RegularAmount regularAmount = new RegularAmount();
-    regularAmount.setFrequency(Frequency.MONTH);
-
-    // when
-    boolean isValid = validator.isValid(regularAmount, context);
-
-    // then
-    assertTrue(isValid);
+  private static Stream<Arguments> weekAndMonthTestCase() {
+    return Stream.of(
+      Arguments.of(Frequency.WEEK),
+      Arguments.of(Frequency.MONTH)
+    );
   }
 }
