@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,7 +28,11 @@ class FrequencyTest {
   private static Stream<Arguments> frequencyAndExpectedMultipleTestData() {
     return Stream.of(
       Arguments.of(Frequency.WEEK, 1),
-      Arguments.of(Frequency.TWO_WEEK, 2)
+      Arguments.of(Frequency.TWO_WEEK, 2),
+      Arguments.of(Frequency.FOUR_WEEK, 4),
+      Arguments.of(Frequency.MONTH, 4),
+      Arguments.of(Frequency.QUARTER, 13),
+      Arguments.of(Frequency.YEAR, 52)
     );
   }
 
@@ -49,5 +54,19 @@ class FrequencyTest {
 
     // then
     assertTrue(isWeeklyMultiple, String.format("%s should be a weekly multiple", frequency));
+  }
+
+  @Test
+  void testMonthAndFourWeekHaveSameMultiple() {
+    // given
+    Frequency month = Frequency.MONTH;
+    Frequency fourWeek = Frequency.FOUR_WEEK;
+
+    // when
+    int monthMultiple = month.getWeekMultiple();
+    int fourWeekMultiple = fourWeek.getWeekMultiple();
+
+    // then
+    assertEquals(monthMultiple, fourWeekMultiple);
   }
 }
