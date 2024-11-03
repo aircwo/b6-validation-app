@@ -7,6 +7,8 @@ import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.example.b6_validation_app.common.Frequency;
 import com.example.b6_validation_app.common.RegularAmount;
 
 import jakarta.validation.ConstraintValidator;
@@ -49,6 +51,33 @@ class WeeklyDivisibleAmountValidatorTest {
     RegularAmount regularAmount = new RegularAmount();
     regularAmount.setAmount("100.00");
     regularAmount.setFrequency(null);
+
+    // when
+    boolean isValid = validator.isValid(regularAmount, context);
+
+    // then
+    assertTrue(isValid);
+  }
+
+  @Test
+  void shouldPassValidationWhenAmountIsNull() {
+    // given
+    RegularAmount regularAmount = new RegularAmount();
+    regularAmount.setAmount(null);
+    regularAmount.setFrequency(Frequency.FOUR_WEEK);
+
+    // when
+    boolean isValid = validator.isValid(regularAmount, context);
+
+    // then
+    assertTrue(isValid);
+  }
+
+  @Test
+  void shouldPassValidationWhenFrequencyIsWeek() {
+    // given
+    RegularAmount regularAmount = new RegularAmount();
+    regularAmount.setFrequency(Frequency.WEEK);
 
     // when
     boolean isValid = validator.isValid(regularAmount, context);
