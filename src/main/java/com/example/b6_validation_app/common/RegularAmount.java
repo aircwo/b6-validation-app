@@ -10,7 +10,7 @@ public class RegularAmount {
 
   public Integer getAmountAsPence() {
     try {
-      return amount != null ? Integer.parseInt(amount) : null;
+      return amount != null ? Integer.parseInt(amount.replace(".", "")) : null;
     } catch (NumberFormatException e) {
       return null;
     }
