@@ -94,6 +94,36 @@ class WeeklyDivisibleAmountValidatorTest {
     assertFalse(isValid);
   }
 
+  @ParameterizedTest()
+  @MethodSource("validFrequencyAndAmountCombinations")
+  void shouldValidateAmountDivisibilityForFrequencyWhenValid(String amount, Frequency frequency) {
+    // given
+    RegularAmount regularAmount = new RegularAmount();
+    regularAmount.setAmount(amount);
+    regularAmount.setFrequency(frequency);
+
+    // when
+    boolean isValid = validator.isValid(regularAmount, context);
+
+    // then
+    assertTrue(isValid);
+  }
+
+  @ParameterizedTest()
+  @MethodSource("inValidFrequencyAndAmountCombinations")
+  void shouldValidateAmountDivisibilityForFrequencyWhenInValid(String amount, Frequency frequency) {
+    // given
+    RegularAmount regularAmount = new RegularAmount();
+    regularAmount.setAmount(amount);
+    regularAmount.setFrequency(frequency);
+
+    // when
+    boolean isValid = validator.isValid(regularAmount, context);
+
+    // then
+    assertFalse(isValid);
+  }
+
   private static Stream<Arguments> nullCheckTestCases() {
     return Stream.of(
       Arguments.of("100.00", null),
@@ -110,6 +140,33 @@ class WeeklyDivisibleAmountValidatorTest {
     return Stream.of(
       Arguments.of(Frequency.WEEK),
       Arguments.of(Frequency.MONTH)
+    );
+  }
+
+  private static Stream<Arguments> validFrequencyAndAmountCombinations() {
+    return Stream.of(
+      // WEEK (always valid)
+      Arguments.of("100.01", Frequency.WEEK),
+      Arguments.of("100.99", Frequency.WEEK),
+      Arguments.of("200.00", Frequency.TWO_WEEK),
+      Arguments.of("100.50", Frequency.TWO_WEEK),
+      Arguments.of("400.00", Frequency.FOUR_WEEK),
+      Arguments.of("100", Frequency.FOUR_WEEK),
+      Arguments.of("400.00", Frequency.MONTH),
+      Arguments.of("100.25", Frequency.MONTH),
+      Arguments.of("1300", Frequency.QUARTER),
+      Arguments.of("728.00", Frequency.QUARTER),
+      Arguments.of("5200.00", Frequency.YEAR),
+      Arguments.of("104.00", Frequency.YEAR)
+    );
+  }
+
+  private static Stream<Arguments> inValidFrequencyAndAmountCombinations() {
+    return Stream.of(
+      Arguments.of("200.01", Frequency.TWO_WEEK),
+      Arguments.of("400.01", Frequency.FOUR_WEEK),
+      Arguments.of("1300.01", Frequency.QUARTER),
+      Arguments.of("9.00", Frequency.YEAR)
     );
   }
 }

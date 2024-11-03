@@ -1,7 +1,6 @@
 package com.example.b6_validation_app.annotation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
 
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import com.example.b6_validation_app.common.Frequency;
 import com.example.b6_validation_app.common.RegularAmount;
-import com.example.b6_validation_app.validator.WeeklyDivisibleAmountValidator;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -38,7 +36,9 @@ class WeeklyDivisibleAmountTest {
     Set<ConstraintViolation<RegularAmount>> violations = validator.validate(invalidAmount);
 
     // then
-    assertEquals(0, violations.size());
-    // todo
+    assertEquals(1, violations.size());
+    ConstraintViolation<RegularAmount> violation = violations.iterator().next();
+    String expectedMessage = "Amount must be divisible into whole pence when split into weekly payments";
+    assertEquals(expectedMessage, violation.getMessage());
   }
 }
