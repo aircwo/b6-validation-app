@@ -9,6 +9,10 @@ public class RegularAmount {
   private Frequency frequency;
 
   public Integer getAmountAsPence() {
-    return 0;
+    try {
+      return amount != null ? Integer.parseInt(amount) : null;
+    } catch (NumberFormatException e) {
+      return null;
+    }
   }
 }

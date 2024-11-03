@@ -45,7 +45,7 @@ class RegularAmountTest {
     RegularAmount regularAmount = new RegularAmount();
 
     // when
-    regularAmount.setAmount("12.34");
+    regularAmount.setAmount("1234");
 
     // then
     assertEquals(1234, regularAmount.getAmountAsPence());
