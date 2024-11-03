@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "4f6b80e0-06f8-44c0-9c26-68cd0bfc5d80",
+		"name": "b6-validation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28292021"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/calculate?amount=729&frequency=QUARTER",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/calculate?amount=142&frequency=TWO_WEEK",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calculate"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "142"
+						},
+						{
+							"key": "frequency",
+							"value": "TWO_WEEK"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "400 Bad Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calculate?amount=729&frequency=QUARTER",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "729"
+								},
+								{
+									"key": "frequency",
+									"value": "QUARTER"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Nov 2024 19:36:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Validation failed\",\n    \"errors\": [\n        \"Amount must be divisible into whole pence when split into weekly payments\"\n    ]\n}"
+				},
+				{
+					"name": "200 OK - amount and frequency of week",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calculate?amount=100&frequency=WEEK",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "100"
+								},
+								{
+									"key": "frequency",
+									"value": "WEEK"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "17"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Nov 2024 19:37:45 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Validation Passed"
+				},
+				{
+					"name": "200 OK - amount and frequency of TWO_WEEK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calculate?amount=348&frequency=TWO_WEEK",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "348"
+								},
+								{
+									"key": "frequency",
+									"value": "TWO_WEEK"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "17"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Nov 2024 19:38:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Validation Passed"
+				},
+				{
+					"name": "AC 1.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calculate?frequency=WEEK",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "frequency",
+									"value": "WEEK"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "17"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Nov 2024 19:46:24 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Validation Passed"
+				},
+				{
+					"name": "AC 2.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calculate?amount=348",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "348"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "17"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Nov 2024 19:46:47 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Validation Passed"
+				},
+				{
+					"name": "AC 3.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calculate?amount=3482.43&frequency=WEEK",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "3482.43"
+								},
+								{
+									"key": "frequency",
+									"value": "WEEK"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "17"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Nov 2024 19:47:27 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Validation Passed"
+				},
+				{
+					"name": "AC 4.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calculate?amount=3482.43&frequency=MONTH",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "3482.43"
+								},
+								{
+									"key": "frequency",
+									"value": "MONTH"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "17"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Nov 2024 19:47:44 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Validation Passed"
+				},
+				{
+					"name": "AC 5.0",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calculate?amount=142&frequency=TWO_WEEK",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "142"
+								},
+								{
+									"key": "frequency",
+									"value": "TWO_WEEK"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "17"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Nov 2024 19:48:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Validation Passed"
+				},
+				{
+					"name": "AC 6.0 - invalid",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/calculate?amount=142.61&frequency=TWO_WEEK",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"calculate"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "142.61"
+								},
+								{
+									"key": "frequency",
+									"value": "TWO_WEEK"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Nov 2024 19:48:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Validation failed\",\n    \"errors\": [\n        \"Amount must be divisible into whole pence when split into weekly payments\"\n    ]\n}"
+				}
+			]
+		}
+	]
+}
