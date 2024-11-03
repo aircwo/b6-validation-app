@@ -39,40 +39,17 @@ class RegularAmountTest {
     assertEquals(expectedOutput, regularAmount.getAmount());
   }
 
-  @Test
-  void shouldGetAmountAsPence() {
+  @ParameterizedTest(name = "input: {0} should convert to {1} pence")
+  @MethodSource("amountAsPenceTestData")
+  void shouldConvertAmountToPence(String amount, Integer expectedPence) {
     // given
     RegularAmount regularAmount = new RegularAmount();
 
     // when
-    regularAmount.setAmount("1234");
+    regularAmount.setAmount(amount);
 
     // then
-    assertEquals(1234, regularAmount.getAmountAsPence());
-  }
-
-  @Test
-  void shouldAllowForNullGetAmountAsPence() {
-    // given
-    RegularAmount regularAmount = new RegularAmount();
-
-    // when
-    regularAmount.setAmount(null);
-
-    // then
-    assertEquals(null, regularAmount.getAmountAsPence());
-  }
-
-  @Test
-  void shouldAllowForDecimalWhenGetAmountAsPence() {
-    // given
-    RegularAmount regularAmount = new RegularAmount();
-
-    // when
-    regularAmount.setAmount("12.34");
-
-    // then
-    assertEquals(1234, regularAmount.getAmountAsPence());
+    assertEquals(expectedPence, regularAmount.getAmountAsPence());
   }
 
   // Can be any stirng value in theory, we anticipate a valid amount before our validation should be hit.
@@ -107,6 +84,24 @@ class RegularAmountTest {
       Arguments.of(".34", ".34"),
       Arguments.of("12.", "12."),
       Arguments.of("1234", "1234")
+    );
+  }
+
+  private static Stream<Arguments> amountAsPenceTestData() {
+    return Stream.of(
+      Arguments.of("1234", 1234),
+      Arguments.of("0", 0),
+      Arguments.of("12.34", 1234),
+      Arguments.of("0.01", 1),
+      Arguments.of("1.00", 100),
+      Arguments.of("99.99", 9999),
+      Arguments.of(null, null),
+      Arguments.of("", null),
+      Arguments.of(".", null),
+      Arguments.of("..", null),
+      Arguments.of("abc", null),
+      Arguments.of("£12.34", null),
+      Arguments.of("12.34£", null)
     );
   }
 }
