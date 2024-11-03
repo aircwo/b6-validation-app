@@ -1,8 +1,10 @@
 package com.example.b6_validation_app.common;
 
+import com.example.b6_validation_app.annotation.WeeklyDivisibleAmount;
 import lombok.Data;
 
 @Data
+@WeeklyDivisibleAmount
 public class RegularAmount {
 
   private String amount;
