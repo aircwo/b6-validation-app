@@ -51,6 +51,18 @@ class RegularAmountTest {
     assertEquals(1234, regularAmount.getAmountAsPence());
   }
 
+  @Test
+  void shouldAllowForNullGetAmountAsPence() {
+    // given
+    RegularAmount regularAmount = new RegularAmount();
+
+    // when
+    regularAmount.setAmount(null);
+
+    // then
+    assertEquals(null, regularAmount.getAmountAsPence());
+  }
+
   // Can be any stirng value in theory, we anticipate a valid amount before our validation should be hit.
   private static Stream<Arguments> stringVariationTestData() {
     return Stream.of(
