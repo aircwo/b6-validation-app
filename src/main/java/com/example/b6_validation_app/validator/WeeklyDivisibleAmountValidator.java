@@ -23,6 +23,11 @@ public class WeeklyDivisibleAmountValidator implements ConstraintValidator<Weekl
       return true;
     }
 
-    return true;
+    if (!frequency.isWeeklyMultiple()) {
+      return true;
+    }
+
+    int amount = regularAmount.getAmountAsPence();
+    return amount % frequency.getWeekMultiple() == 0;
   }
 }

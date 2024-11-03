@@ -1,6 +1,7 @@
 package com.example.b6_validation_app.validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -76,7 +77,21 @@ class WeeklyDivisibleAmountValidatorTest {
     boolean isValid = validator.isValid(regularAmount, context);
 
     // then
-    assertTrue(isValid, String.format("Validation should pass when amount is '%s' and frequency is '%s'", amount, frequency));
+    assertTrue(isValid);
+  }
+
+  @Test
+  void shouldReturnFalseWhenAmountIsNotAMultiple() {
+    // given
+    RegularAmount regularAmount = new RegularAmount();
+    regularAmount.setAmount("100.11");
+    regularAmount.setFrequency(Frequency.QUARTER);
+
+    // when
+    boolean isValid = validator.isValid(regularAmount, context);
+
+    // then
+    assertFalse(isValid);
   }
 
   private static Stream<Arguments> nullCheckTestCases() {
