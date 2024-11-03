@@ -19,7 +19,7 @@ public class WeeklyDivisibleAmountValidator implements ConstraintValidator<Weekl
       return true;
     }
 
-    if (frequency == Frequency.WEEK) {
+    if (frequency == Frequency.WEEK || frequency == Frequency.MONTH) {
       return true;
     }
 

@@ -85,4 +85,17 @@ class WeeklyDivisibleAmountValidatorTest {
     // then
     assertTrue(isValid);
   }
+
+  @Test
+  void shouldPassValidationWhenFrequencyIsMonth() {
+    // given
+    RegularAmount regularAmount = new RegularAmount();
+    regularAmount.setFrequency(Frequency.MONTH);
+
+    // when
+    boolean isValid = validator.isValid(regularAmount, context);
+
+    // then
+    assertTrue(isValid);
+  }
 }
