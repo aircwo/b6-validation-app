@@ -18,11 +18,9 @@ class FrequencyTest {
   void weekMultipleShouldMatchFrequencyMultiple(Frequency frequency, int expectedWeekMultiple) {
     // given / when
     int actualWeekMultiple = frequency.getWeekMultiple();
-    boolean isWeeklyMultiple = frequency.isWeeklyMultiple();
 
     // then
     assertEquals(expectedWeekMultiple, actualWeekMultiple);
-    assertTrue(isWeeklyMultiple);
   }
 
   @ParameterizedTest
@@ -33,16 +31,6 @@ class FrequencyTest {
 
     // then
     assertTrue(weekMultiple > 0, String.format("%s should have positive week multiple", frequency));
-  }
-
-  @ParameterizedTest
-  @EnumSource(Frequency.class)
-  void frequenciesAreWeeklyMultiples(Frequency frequency) {
-    // given / when
-    boolean isWeeklyMultiple = frequency.isWeeklyMultiple();
-
-    // then
-    assertTrue(isWeeklyMultiple, String.format("%s should be a weekly multiple", frequency));
   }
 
   @Test

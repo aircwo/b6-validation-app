@@ -19,7 +19,4 @@ public enum Frequency {
 
   private final int weekMultiple;
 
-  public boolean isWeeklyMultiple() {
-    return weekMultiple > 0;
-  }
 }
